@@ -3,19 +3,25 @@
 
 #include "snake.h"
 #include "position.h"
+#include "food.h"
 
 class Game
 {
 private:
     Snake snake;
-    const int WIDTH = 50;
-    const int HEIGHT = 20;
+    Food food;
+    int WIDTH=20;
+    int HEIGHT=10;
     position oldpos;
     position nowpos;
     int dx,dy;
+    int score=0;
     bool gameOver=false;
+    bool foodGenerated=false;
+    bool snakeGrow=false;
 
 public:
+    Game(int width, int height);
     void run();
     void init();
     void processInput();

@@ -19,3 +19,8 @@ deque<position> Snake::print()const
 {
     return body;
 }
+
+void Snake::grow()
+{
+    body.push_back(last);
+}
