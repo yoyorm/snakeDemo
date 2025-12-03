@@ -1,6 +1,7 @@
 
 #include "snake.h"
 
+//默认出生点
 Snake::Snake()
 {
     body.push_front(position{25, 10});
@@ -8,8 +9,16 @@ Snake::Snake()
     body.push_front(position{23, 10});
 }
 
+Snake::Snake(const position &pos)
+{
+    body.push_front(pos);
+    body.push_front(position{pos.x-1, pos.y});
+    body.push_front(position{pos.x-2, pos.y});
+}
+
 void Snake::move(const position &pos)
 {
+    
     body.push_front(pos);
     last=body.back();
     body.pop_back();

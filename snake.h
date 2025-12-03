@@ -12,6 +12,7 @@ class Snake
     public:
     position last;//记录尾部最后一次消失位置，用于擦除和变长
     Snake();
+    Snake(const position &position);
     void move(const position &position);
     deque<position> print()const;
     void grow();

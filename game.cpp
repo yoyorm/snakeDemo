@@ -5,6 +5,8 @@
 #include "food.h"
 #include <conio.h>
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 using namespace std;
 
 // 实现写入光标位置
@@ -35,7 +37,12 @@ void Game::init()
         drawChar(WIDTH - 1, y, '#');
     }
 
-    nowpos = position{25, 10};
+    srand((unsigned int)time(NULL));
+    int x = rand() % (WIDTH - 5) + 3;
+    int y = rand() % (HEIGHT - 5) + 3;
+    nowpos.x = x;
+    nowpos.y = y;
+    snake = Snake(nowpos);
 }
 
 Game::Game(int width, int height)
@@ -142,7 +149,7 @@ void Game::render()
     setCursorPosition(WIDTH + 3, 1);
     cout << "Score: " << score << "  ";
 
-    setCursorPosition(WIDTH + 3, HEIGHT-1);
+    setCursorPosition(WIDTH + 3, HEIGHT - 1);
     cout << "snake game Made by @yoyorm";
 }
 
@@ -163,10 +170,9 @@ void Game::gameOver()
     setCursorPosition(0, HEIGHT + 2);
     cout << "Game Over!" << endl;
     cout << "Your Score: " << score << endl;
-    cout << "Press a key to exit...3" << endl;
+    char c;
+    cin >> c;
     system("pause");
-    cout << "Press a key to exit...2" << endl;
-    system("pause");
-    cout << "Press a key to exit...1" << endl;
+    cout << "Press a key to exit..." << endl;
     system("pause");
 }

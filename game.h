@@ -14,7 +14,7 @@ private:
     int HEIGHT=10;
     position oldpos;
     position nowpos;
-    int dx,dy;
+    int dx=1,dy=0;
     int score=0;
     bool isGameOver=false;
     bool foodGenerated=false;
