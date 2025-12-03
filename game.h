@@ -16,7 +16,7 @@ private:
     position nowpos;
     int dx,dy;
     int score=0;
-    bool gameOver=false;
+    bool isGameOver=false;
     bool foodGenerated=false;
     bool snakeGrow=false;
 
@@ -27,6 +27,7 @@ public:
     void processInput();
     void update();
     void render();
+    void gameOver();
 };
 
 #endif

@@ -34,7 +34,7 @@ void Game::init()
         drawChar(0, y, '#');
         drawChar(WIDTH - 1, y, '#');
     }
-    
+
     nowpos = position{25, 10};
 }
 
@@ -86,6 +86,15 @@ void Game::update()
         snake.move(nowpos);
     }
 
+    if (snake.isCollision())
+    {
+        isGameOver = true;
+    }
+    if (nowpos.x > WIDTH - 2 || nowpos.y > HEIGHT - 2 || nowpos.x <= 0 || nowpos.y <= 0)
+    {
+        isGameOver = true;
+    }
+
     // 食物生成并且设置间隔
     static int count = 0;
     if (count++ % 25 == 0)
@@ -129,22 +138,35 @@ void Game::render()
     // 显示蛇头位置
     setCursorPosition(WIDTH + 3, 0);
     cout << "NowPos: " << nowpos.x << " " << nowpos.y << "  ";
-    //显示分数
+    // 显示分数
     setCursorPosition(WIDTH + 3, 1);
     cout << "Score: " << score << "  ";
 
-    setCursorPosition(WIDTH + 3, HEIGHT);
+    setCursorPosition(WIDTH + 3, HEIGHT-1);
     cout << "snake game Made by @yoyorm";
 }
 
 void Game::run()
 {
     init();
-    while (!gameOver)
+    while (!isGameOver)
     {
         processInput();
         update();
         render();
-        Sleep(150);
+        Sleep(120);
     }
+}
+
+void Game::gameOver()
+{
+    setCursorPosition(0, HEIGHT + 2);
+    cout << "Game Over!" << endl;
+    cout << "Your Score: " << score << endl;
+    cout << "Press a key to exit...3" << endl;
+    system("pause");
+    cout << "Press a key to exit...2" << endl;
+    system("pause");
+    cout << "Press a key to exit...1" << endl;
+    system("pause");
 }

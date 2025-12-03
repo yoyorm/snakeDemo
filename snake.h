@@ -15,6 +15,7 @@ class Snake
     void move(const position &position);
     deque<position> print()const;
     void grow();
+    bool isCollision() const;
     
 };
 

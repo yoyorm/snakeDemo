@@ -24,3 +24,15 @@ void Snake::grow()
 {
     body.push_back(last);
 }
+
+bool Snake::isCollision() const
+{
+    for(int i=1;i<body.size();i++)
+    {
+        if(body[0].x==body[i].x && body[0].y==body[i].y)
+        {
+            return true;
+        }
+    }
+    return false;
+}
