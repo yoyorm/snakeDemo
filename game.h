@@ -22,6 +22,7 @@ private:
 
 public:
     Game(int width, int height);
+    void begin();
     void run();
     void init();
     void processInput();

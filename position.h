@@ -13,5 +13,12 @@ struct position
     {
         return x != other.x || y != other.y;
     }
+    position operator+=(const position &other)
+    {
+        x += other.x;
+        y += other.y;
+        return *this;
+
+    }
 };
 #endif

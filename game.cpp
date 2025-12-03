@@ -22,6 +22,23 @@ void drawChar(short x, short y, char c)
     cout << c;
 }
 
+void Game::begin()
+{
+    system("cls");
+    cout << "Welcome to Snake Game!" << endl;
+    cout << "Press any key to begin..." << endl;
+    system("pause");
+    cout << "3" << endl;
+    Sleep(300);
+    cout << "2" << endl;
+    Sleep(300);
+    cout << "1" << endl;
+    Sleep(300);
+    cout << "Go! ! !" << endl;
+    Sleep(300);
+    system("cls");
+}
+
 // game初始化
 void Game::init()
 {
@@ -36,6 +53,11 @@ void Game::init()
         drawChar(0, y, '#');
         drawChar(WIDTH - 1, y, '#');
     }
+
+    setCursorPosition(WIDTH + 3, HEIGHT - 1);
+    cout << "snake game Made by @yoyorm";
+    setCursorPosition(WIDTH + 3, HEIGHT - 2);
+    cout << "Press w/a/s/d to control the snake.";
 
     srand((unsigned int)time(NULL));
     int x = rand() % (WIDTH - 5) + 3;
@@ -60,26 +82,26 @@ void Game::processInput()
         if (c == 'w' && dy != -1)
         {
             dx = 0;
-            dy = 1;
-            nowpos.y--;
+            dy = -1;
+            // nowpos.y--;
         }
         if (c == 's' && dy != 1)
         {
             dx = 0;
-            dy = -1;
-            nowpos.y++;
+            dy = 1;
+            // nowpos.y++;
         }
         if (c == 'a' && dx != 1)
         {
             dx = -1;
             dy = 0;
-            nowpos.x--;
+            // nowpos.x--;
         }
         if (c == 'd' && dx != -1)
         {
             dx = 1;
             dy = 0;
-            nowpos.x++;
+            // nowpos.x++;
         }
     }
 }
@@ -87,6 +109,8 @@ void Game::processInput()
 // 更新蛇状态
 void Game::update()
 {
+    nowpos.x += dx;
+    nowpos.y += dy;
     if (nowpos != oldpos)
     {
         oldpos = nowpos;
@@ -132,8 +156,8 @@ void Game::update()
 void Game::render()
 {
     // 清除蛇尾
-    if (!snakeGrow)
-        drawChar(snake.last.x, snake.last.y, ' ');
+    // if (!snakeGrow)
+    drawChar(snake.last.x, snake.last.y, ' ');
     // 画蛇
     for (auto pos : snake.print())
     {
@@ -148,9 +172,6 @@ void Game::render()
     // 显示分数
     setCursorPosition(WIDTH + 3, 1);
     cout << "Score: " << score << "  ";
-
-    setCursorPosition(WIDTH + 3, HEIGHT - 1);
-    cout << "snake game Made by @yoyorm";
 }
 
 void Game::run()
@@ -161,7 +182,7 @@ void Game::run()
         processInput();
         update();
         render();
-        Sleep(120);
+        Sleep(200);
     }
 }
 
